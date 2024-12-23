@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs", // or "esnext", depending on your setup
+    "esModuleInterop": true, // This enables default imports for CommonJS modules
+    "skipLibCheck": true, // Optional: helps speed up compilation
+    "strict": true, // Optional: ensures strict typing in your code
+    "target": "es6", // Adjust target as per your requirements
+    "moduleResolution": "node"
+  }
+}
