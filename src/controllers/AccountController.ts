@@ -12,7 +12,7 @@ export class AccountController {
     const { accountId, amount } = req.body;
 
     if (!accountId || !amount || amount <= 0) {
-      res.status(400).send("Invalid request parameters");
+      res.status(400).send({ error: "Invalid request parameters" });
       return;
     }
 
@@ -28,7 +28,7 @@ export class AccountController {
 
       await this.notificationService.notify(event);
 
-      res.status(200).send("Withdrawal successful");
+      res.status(200).send({ message: "Withdrawal successful" });
     } catch (error: any) {
       const event = new AccountEvent(
         accountId,
@@ -40,10 +40,12 @@ export class AccountController {
       await this.notificationService.notify(event);
 
       if (error.name === "InsufficientFundsError") {
-        res.status(400).send("Insufficient funds for withdrawal");
+        res.status(400).send({ error: "Insufficient funds for withdrawal" });
       } else {
         logger.error("Error during withdrawal:", error);
-        res.status(500).send("Withdrawal failed due to an internal error");
+        res
+          .status(500)
+          .send({ error: "Withdrawal failed due to an internal error" });
       }
     }
   }
@@ -52,7 +54,7 @@ export class AccountController {
     const { accountId, amount } = req.body;
 
     if (!accountId || !amount || amount <= 0) {
-      res.status(400).send("Invalid request parameters");
+      res.status(400).send({ error: "Invalid request parameters" });
       return;
     }
 
@@ -66,7 +68,7 @@ export class AccountController {
       );
       await this.notificationService.notify(event);
 
-      res.status(200).send("Deposit successful");
+      res.status(200).send({ message: "Deposit successful" });
     } catch (error: any) {
       logger.error("Error during deposit:", error);
       const event = new AccountEvent(
@@ -78,7 +80,9 @@ export class AccountController {
 
       await this.notificationService.notify(event);
 
-      res.status(500).send("Deposit failed due to an internal error");
+      res
+        .status(500)
+        .send({ error: "Deposit failed due to an internal error" });
     }
   }
 
@@ -86,7 +90,7 @@ export class AccountController {
     const { accountId } = req.body;
 
     if (!accountId) {
-      res.status(400).send("Invalid request parameters");
+      res.status(400).send({ error: "Invalid request parameters" });
       return;
     }
 
@@ -114,7 +118,9 @@ export class AccountController {
 
       await this.notificationService.notify(event);
 
-      res.status(500).send("Deposit failed due to an internal error");
+      res
+        .status(500)
+        .send({ error: "Deposit failed due to an internal error" });
     }
   }
 }
