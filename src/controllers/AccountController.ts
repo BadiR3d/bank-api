@@ -102,7 +102,7 @@ export class AccountController {
 
       await this.notificationService.notify(event);
 
-      res.status(200).send(`Balance R: ${accountBalnce?.toFixed(2)}`);
+      res.status(200).send({ balance: accountBalnce?.toFixed(2) });
     } catch (error: any) {
       logger.error("Error during deposit:", error);
       const event = new AccountEvent(
