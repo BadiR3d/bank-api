@@ -25,7 +25,7 @@ Before running the application, ensure you have the following installed:
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/BadiR3d/bank-api
    cd <repository-folder>
    ```
 
